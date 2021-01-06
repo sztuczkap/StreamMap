@@ -1,5 +1,6 @@
 package pl.sztuczkap;
 
+import java.math.BigDecimal;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -9,11 +10,11 @@ public class Main {
 
     public static void main(String[] args) {
 
-        List<User> users = new ArrayList<>();
+/*        List<User> users = new ArrayList<>();
         users.add(new User(1, "Jan", 30, List.of("Sport", "Motoryzacja")));
         users.add(new User(2, "Ola", 20, List.of("Film", "Podróże")));
         users.add(new User(3, "Adam", 25, List.of("Informatyka")));
-        users.add(new User(4, "Jan", 50, List.of("Malarstwo")));
+        users.add(new User(4, "Jan", 50, List.of("Malarstwo")));*/
 
 /*        // z list tworzymy mape jako klucz to id a wartosc imie
         Map<Integer, String> collect =  users
@@ -135,6 +136,32 @@ public class Main {
                         Collectors.summarizingInt(User::getAge)));
 
         collect.forEach((k, v) -> System.out.println("Klucz: " + k + " wartość: " + v.getAverage()));*/
+
+        // ====================================
+        // =========== Metoda reduce ==========  // redukcja strumienia
+        // ====================================
+        List<User> users = new ArrayList<>();
+        users.add(new User(1, "Jan", 30, BigDecimal.valueOf(3000.0), List.of("Sport", "Motoryzacja")));
+        users.add(new User(2, "Ola", 20, BigDecimal.valueOf(2800.99), List.of("Film", "Podróże")));
+        users.add(new User(3, "Adam", 25, BigDecimal.valueOf(6000.5), List.of("Informatyka")));
+        users.add(new User(4, "Jan", 50, BigDecimal.valueOf(9000.0), List.of("Malarstwo")));
+
+/*        Optional<BigDecimal> reduce = users
+                .stream()
+                .map(User::getSalary)
+                .reduce(BigDecimal::add); // (salar1, salar2) -> salar1.add(salar2)
+
+        System.out.println(reduce.get()); // drukujemy zsumowane pensje*/
+
+        // wykorzystujemy 2-argumentowa wersję funkcji reduce
+        // gdzie jako pierwszy argument podamy wartosc do rozpoczecia obliczen
+        // np mamy buzdet i chcemy uzyskac zysk po zaplaceniu pensji uzytkownikom
+        BigDecimal reduce = users
+                .stream()
+                .map(User::getSalary)
+                .reduce(BigDecimal.valueOf(40000.0), (salary1, salary2) -> salary1.subtract(salary2));
+
+        System.out.println(reduce);
 
     }
 }
