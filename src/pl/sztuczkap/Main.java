@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class Main {
@@ -156,12 +157,34 @@ public class Main {
         // wykorzystujemy 2-argumentowa wersję funkcji reduce
         // gdzie jako pierwszy argument podamy wartosc do rozpoczecia obliczen
         // np mamy buzdet i chcemy uzyskac zysk po zaplaceniu pensji uzytkownikom
-        BigDecimal reduce = users
+/*        BigDecimal reduce = users
                 .stream()
                 .map(User::getSalary)
                 .reduce(BigDecimal.valueOf(40000.0), (salary1, salary2) -> salary1.subtract(salary2));
 
-        System.out.println(reduce);
+        System.out.println(reduce);*/
+
+        // ================================================
+        // =========== Strumienie typów prostych ==========
+        // ================================================
+
+/*        IntStream stream = IntStream.of(1, 5, 9, 10);  // strumien typow prostych
+        stream.forEach(System.out::println);*/
+
+/*        int[] array = new int[]{1, 4, 7, 9}; // strumien tablicy
+        IntStream stream = Arrays.stream(array);
+        stream.forEach(System.out::println);*/
+
+/*        IntStream stream = IntStream.range(0, 10); // generujemy elementy w zakresie 0-10
+        stream.forEach(System.out::println);*/
+
+/*        IntStream stream = users.stream().mapToInt(user -> user.getName().length()); // mapujemy długość ich imion
+        stream.forEach(System.out::println);*/
+
+/*        //przekształcamy strumien typów prostych w strumien obiektów mamy metodę boxed()
+        Stream<Integer> stream = users.stream().mapToInt(user -> user.getName().length()).boxed();
+        stream.forEach(System.out::println);*/
+
 
     }
 }
